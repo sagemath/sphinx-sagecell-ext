@@ -48,10 +48,28 @@ def visit_sagecell_node(self, node):
 def depart_sagecell_node(self, node):
     pass
 
+
+def latex_visit_sagecell_node(self, node):
+
+    global linked
+
+    self.body.append("\n\n")
+    self.body.append("\\begin{verbatim}\n")
+    self.body.append(node['content'])
+    self.body.append("\n\end{verbatim}")
+    self.body.append("\n\n")
+
+    
+
+def latex_depart_sagecell_node(self, node):
+    pass
+
+
 def setup(app):
 
     # Register a Docutils node class
     app.add_node(sagecell,
-                 html=(visit_sagecell_node, depart_sagecell_node))
+                 html=(visit_sagecell_node, depart_sagecell_node),
+    latex=(latex_visit_sagecell_node, latex_depart_sagecell_node))
     # Register a Docutils directive
     app.add_directive("sagecellserver", SageCell)
