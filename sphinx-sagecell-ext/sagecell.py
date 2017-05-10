@@ -65,7 +65,7 @@ def mint_latex_visit_sagecell_node(self, node):
 
     self.body.append("\n\n")
     self.body.append("\\definecolor{bg}{rgb}{0.95,0.95,0.95}\n")
-    self.body.append("\\begin{minted}[linenos,bgcolor=bg]{py}\n")
+    self.body.append("\\begin{minted}[breaklines, frame=lines,linenos,bgcolor=bg]{py}\n")
     self.body.append(node['content'])
     self.body.append("\n\\end{minted}")
     self.body.append("\n\n")
