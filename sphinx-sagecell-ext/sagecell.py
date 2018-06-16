@@ -2,7 +2,12 @@
 
 from docutils.nodes import Element, General
 from docutils.parsers.rst import directives
-from sphinx.util.compat import Directive
+
+
+try:
+    from sphinx.util.compat import Directive
+except ImportError:
+    from docutils.parsers.rst import Directive
 
 linked = True # The default value for 'Linked Cells' option
 
