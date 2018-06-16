@@ -64,6 +64,18 @@ def latex_visit_sagecell_node(self, node):
     self.body.append("\n\end{verbatim}")
     self.body.append("\n\n")
 
+def mint_latex_visit_sagecell_node(self, node):
+
+    global linked
+
+    self.body.append("\n\n")
+    self.body.append("\\definecolor{bg}{rgb}{0.95,0.95,0.95}\n")
+    self.body.append("\\begin{minted}[breaklines, frame=lines,linenos,bgcolor=bg]{py}\n")
+    self.body.append(node['content'])
+    self.body.append("\n\\end{minted}")
+    self.body.append("\n\n")
+
+
     
 
 def latex_depart_sagecell_node(self, node):
@@ -75,6 +87,6 @@ def setup(app):
     # Register a Docutils node class
     app.add_node(sagecell,
                  html=(visit_sagecell_node, depart_sagecell_node),
-    latex=(latex_visit_sagecell_node, latex_depart_sagecell_node))
+    latex=(mint_latex_visit_sagecell_node, latex_depart_sagecell_node))
     # Register a Docutils directive
     app.add_directive("sagecellserver", SageCell)
